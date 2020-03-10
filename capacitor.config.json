@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "Italy_COVID-19_Monitor",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

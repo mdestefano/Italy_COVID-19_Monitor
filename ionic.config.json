@@ -1,0 +1,7 @@
+{
+  "name": "Italy_COVID-19_Monitor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
