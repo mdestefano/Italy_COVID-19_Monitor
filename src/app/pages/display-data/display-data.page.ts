@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayDataPage implements OnInit {
 
+  data: any[];
+
   constructor() { }
 
   ngOnInit() {
