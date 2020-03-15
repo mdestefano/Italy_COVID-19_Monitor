@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>DisplayData</ion-title>
+    <ion-title *ngIf="dispRegioni">Dati Regione</ion-title>
+    <ion-title *ngIf="!dispRegioni">Dati Nazionali</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,25 +10,25 @@
     <ion-item>
       <ion-label color="infetti">
         <h1>Contagiati Attuali</h1>
-        <h2>Numero</h2>
+        <h2>{{data.totale_attualmente_positivi}}</h2>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label color="guariti">
         <h1>Guariti</h1>
-        <h2>Numero</h2>
+        <h2>{{data.dimessi_guariti}}</h2>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label color="deceduti">
         <h1>Deceduti</h1>
-        <h2>Numero</h2>
+        <h2>{{data.deceduti}}</h2>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label color="totale">
         <h1>Totale</h1>
-        <h2>Numero</h2>
+        <h2>{{data.totale_casi}}</h2>
       </ion-label>
     </ion-item>
   </ion-list>

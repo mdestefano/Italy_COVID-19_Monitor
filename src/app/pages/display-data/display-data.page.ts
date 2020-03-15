@@ -22,9 +22,9 @@ export class DisplayDataPage implements OnInit {
 
       if (idRegione && nomeRegione) {
         this.dispRegioni = true;
-        this.data = this.dataService.getMostRecentRegionalDataFor({code: idRegione, name: nomeRegione})
+        this.dataService.getMostRecentRegionalDataFor({code: idRegione, name: nomeRegione}).subscribe(regionalData => {this.data = regionalData});
       } else {
-        this.data = this.dataService.getMostRecentNationalData();
+        this.dataService.getMostRecentNationalData().subscribe(nationalData => {this.data = nationalData});
       }
     });
   }
