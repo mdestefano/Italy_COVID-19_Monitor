@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { parse } from "date-fns";
 import { Observable } from "rxjs";
-import { element } from 'protractor';
 
 const basePath =
   "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/";
@@ -58,11 +57,18 @@ export class DataService {
     }));
   }
 
-  getProvincesId(){
+  getProvincesIdFor(region: ZoneIdentifier){
     if(!this.provincialData){
       this.getProvincialData();
     }
-    return this.extractZoneIdFromCollection(this.provincialData, 127,'codice_provincia','denominazione_provincia');
+
+    const filteredCollection = this.provincialData.pipe(map(dataList =>{
+      return dataList.filter(element =>{        
+        return element.codice_regione == region.code && element.denominazione_regione == region.name;
+      })
+    }));
+    
+    return this.extractZoneIdFromCollection(filteredCollection, 127,'codice_provincia','denominazione_provincia');
   }
 
   getMostRecentProvincialDataFor(province: ZoneIdentifier){
