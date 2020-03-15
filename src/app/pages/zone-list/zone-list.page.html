@@ -7,7 +7,7 @@
 <ion-content>
   <div *ngIf="data">
     <ion-list *ngFor="let item of data; index as itemId">
-      <ion-item routerLink="'/regione/' + item.code + '/' + item.name">        
+      <ion-item [routerLink]="'/regione/' + item.code + '/' + item.name">        
           <ion-label>
             {{item.name}}
           </ion-label>        
