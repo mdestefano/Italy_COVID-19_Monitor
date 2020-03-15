@@ -1,20 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ZoneList</ion-title>
+    <ion-title>Elenco Regioni</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="data">
     <ion-list *ngFor="let item of data; index as itemId">
-      <ion-item>
-        <a><ion-label [title] = "item.nome + 'details'" [routerLink] = "'/' + item.name">
-          {{item.name}}
-        </ion-label></a>
+      <ion-item routerLink="'/regione/' + item.code + '/' + item.name">        
+          <ion-label>
+            {{item.name}}
+          </ion-label>        
       </ion-item>
     </ion-list>
   </div>
-  
+
   <!-- Skeleton screen -->
   <div *ngIf="!data">
     <ion-list>
@@ -61,4 +61,3 @@
   </div>
 
 </ion-content>
-

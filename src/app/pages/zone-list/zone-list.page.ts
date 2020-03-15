@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-zone-list',
@@ -9,9 +10,12 @@ export class ZoneListPage implements OnInit {
 
   data: any[];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.getRegionsId().subscribe(fetchedIds =>{
+      this.data = fetchedIds;
+    });
   }
 
 }
