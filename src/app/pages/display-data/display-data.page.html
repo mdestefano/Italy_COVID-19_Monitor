@@ -10,48 +10,67 @@
 
 <ion-content *ngIf="data">
   <ion-list>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="contagiati"><h1>CONTAGIATI</h1></ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label color="contagiati-attuali"
+          ><p>Attuali: {{data.totale_attualmente_positivi}} persone</p></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label color="ospedalizzati"
+          ><p>Ospedalizzati: {{data.totale_ospedalizzati}} persone</p></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label color="ospedalizzati"
+          ><p>
+            In isolamento domiciliare: {{data.isolamento_domiciliare}} persone
+          </p></ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label color="terapia-intensiva"
+          ><p>In terapia intensiva: {{data.terapia_intensiva}} persone</p></ion-label
+        >
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="deceduti"><h1>DECEDUTI</h1></ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label color="danger"><p>Totale: {{data.deceduti}} persone</p></ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="guariti"><h1>GUARITI</h1></ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label color="success"><p>Totale: {{data.dimessi_guariti}} persone</p></ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label color="primary"><h1>TAMPONI EFFETTUATI</h1></ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label color="secondary"><p>Totale: {{data.tamponi}} tamponi</p></ion-label>
+      </ion-item>
+    </ion-item-group>
+
     <ion-item>
-      <ion-label color="infetti">
-        <h1>Contagiati Attuali</h1>
-        <h2>{{data.totale_attualmente_positivi}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="guariti">
-        <h1>Guariti</h1>
-        <h2>{{data.dimessi_guariti}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="deceduti">
-        <h1>Deceduti</h1>
-        <h2>{{data.deceduti}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="totale">
-        <h1>Totale</h1>
-        <h2>{{data.totale_casi}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="tertiary">
-        <h1>Totale Ospedalizzati</h1>
-        <h2>{{data.totale_ospedalizzati}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="warning">
-        <h1>In Terapia Intensiva</h1>
-        <h2>{{data.terapia_intensiva}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label color="secondary">
-        <h1>Tamponi Eseguiti</h1>
-        <h2>{{data.tamponi}}</h2>
-      </ion-label>
+      <ion-label><h1>TOTALE: {{data.totale_casi}} persone</h1></ion-label>
     </ion-item>
   </ion-list>
-
 </ion-content>
