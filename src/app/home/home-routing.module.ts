@@ -28,6 +28,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'statistiche',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/statistics/statistics.module').then(m => m.StatisticsPageModule)
+          }
+        ]
+      },
+      {
         path: 'nazionali',
         children: [
           {
