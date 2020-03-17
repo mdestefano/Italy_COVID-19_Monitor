@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { DisplayDataPageRoutingModule } from './display-data-routing.module';
 
 import { DisplayDataPage } from './display-data.page';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DisplayDataPageRoutingModule
+    DisplayDataPageRoutingModule,
+    ChartsModule
   ],
   declarations: [DisplayDataPage]
 })

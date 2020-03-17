@@ -9,6 +9,17 @@
 </ion-header>
 
 <ion-content *ngIf="data">
+
+  <ion-card>
+    <canvas baseChart 
+  [datasets]="chartData" 
+  [labels]="chartLabels" 
+  [options]="chartOptions" 
+  [colors]="chartColors"  
+  [chartType]="chartType">
+  </canvas>
+  </ion-card>
+
   <ion-list>
     <ion-item-group>
       <ion-item-divider>
