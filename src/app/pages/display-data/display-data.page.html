@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start" *ngIf="dispRegioni">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="dispRegioni">Dati Regione {{nomeRegione}}</ion-title>
     <ion-title *ngIf="!dispRegioni">Dati Nazionali</ion-title>
