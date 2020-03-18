@@ -60,7 +60,8 @@ export class DisplayDataPage implements OnInit {
 
     this.chartLabels.push('Contagiati','Deceduti','Guariti');
     this.chartData[0].data.push(this.data.totale_attualmente_positivi, this.data.deceduti, this.data.dimessi_guariti);
-   
+    this.chartColors = [{backgroundColor: '#ff5500'}, {backgroundColor: '#ff0000'}, {backgroundColor: '#ff00ff'}];
+    
   }
 
 
