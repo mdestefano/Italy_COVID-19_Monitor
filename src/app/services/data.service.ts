@@ -11,8 +11,7 @@ const basePath =
   providedIn: "root"
 })
 export class DataService {
-  private regionalData: Observable<any[]>;
-  private provincialData: Observable<any[]>;
+  private regionalData: Observable<any[]>;  
 
   constructor(private http: HttpClient) {}
 
@@ -33,10 +32,6 @@ export class DataService {
     this.regionalData = this.getData("dpc-covid19-ita-regioni.json");
   }
 
-  getProvincialData(){
-    this.provincialData = this.getData('dpc-covid19-ita-province.json');
-  }
-
   getRegionsId(){
     if(!this.regionalData){
       this.getRegionalData();
@@ -45,43 +40,21 @@ export class DataService {
   }
 
   getMostRecentRegionalDataFor(region: ZoneIdentifier){
-    if(!this.regionalData){
+    const regionalData = this.getHistoricalDataFor(region);
+    return regionalData.pipe(map((list: any[])=>{
+      return list[0];
+    }));
+  }
+
+  getHistoricalDataFor(region: ZoneIdentifier) {
+    if (!this.regionalData) {
       this.getRegionalData();
     }
-
-    return this.regionalData.pipe(map((list: any[]) => {      
-      const filteredList = list.filter(element => {        
+    return this.regionalData.pipe(map((list: any[]) => {
+      const filteredList = list.filter(element => {
         return element.codice_regione == region.code && element.denominazione_regione == region.name;
       });
-      return filteredList[0];
-    }));
-  }
-
-  getProvincesIdFor(region: ZoneIdentifier){
-    if(!this.provincialData){
-      this.getProvincialData();
-    }
-
-    const filteredCollection = this.provincialData.pipe(map(dataList =>{
-      return dataList.filter(element =>{        
-        return element.codice_regione == region.code && element.denominazione_regione == region.name;
-      })
-    }));
-    
-    return this.extractZoneIdFromCollection(filteredCollection, 127,'codice_provincia','denominazione_provincia');
-  }
-
-  getMostRecentProvincialDataFor(province: ZoneIdentifier){
-    if(!this.provincialData){
-      this.getProvincialData();
-    }
-
-    return this.provincialData.pipe(map((list: any[]) =>{
-      const filteredList = list.filter(element =>{
-        return element.codice_provincia == province.code && element.denominazione_provincia == province.name;
-      });
-
-      return filteredList[0];
+      return filteredList;
     }));
   }
 
