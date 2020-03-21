@@ -24,7 +24,6 @@ export class DisplayDataPage implements OnInit {
 
   chartType;
   data: any;
-  historicalData: any[];
   dispRegioni: boolean;
   idRegione;
   nomeRegione;
@@ -46,16 +45,14 @@ export class DisplayDataPage implements OnInit {
         this.dispRegioni = true;
         const region = { code: this.idRegione, name: this.nomeRegione };
         this.dataService
-          .getHistoricalDataFor(region)
+          .getMostRecentRegionalDataFor(region)
           .subscribe(regionalData => {
-            this.data = regionalData[0];
-            this.historicalData = regionalData;
+            this.data = regionalData;
             this.initChart();
           });
       } else {
-        this.dataService.getNationalData().subscribe(nationalData => {
-          this.data = nationalData[0];
-          this.historicalData = nationalData;
+        this.dataService.getMostRecentNationalData().subscribe(nationalData => {
+          this.data = nationalData;
           this.initChart();
         });
       }
@@ -65,7 +62,7 @@ export class DisplayDataPage implements OnInit {
   private initChart() {
     this.chartLabels = [];
     this.chartData[0].data = [];
-    this.chartType = "bar";
+    this.chartType = "doughnut";
 
     this.chartLabels.push("Contagiati", "Deceduti", "Guariti");
     this.chartData[0].data.push(
@@ -78,24 +75,5 @@ export class DisplayDataPage implements OnInit {
         backgroundColor: ["#db6d00", "#db0000", "#00881c"]
       }
     ];
-  }
-
-  private initChartAndamento() {
-    this.chartLabels = [];
-    this.chartData[0].data = [];
-    this.chartType = "line";
-
-    for (let item of this.historicalData) {
-      this.chartLabels.push(this.datePipe.transform(item.data, "dd/MM/yyyy"));
-      this.chartData[0].data.push(item.totale_casi);
-    }
-
-    this.chartColors = [{backgroundColor: "#445566"}]
-
-    this.chart.chart.update();
-  }
-
-  onClick() {
-    this.initChartAndamento();
   }
 }
