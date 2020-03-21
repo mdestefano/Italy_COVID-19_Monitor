@@ -27,9 +27,9 @@ export class DisplayDataPage implements OnInit {
   dispRegioni: boolean;
   idRegione;
   nomeRegione;
-  provincesData: any[];
   chartColors: Color[];
   private datePipe: DatePipe;
+  linkAndamento: string;
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.dispRegioni = false;
@@ -48,11 +48,13 @@ export class DisplayDataPage implements OnInit {
           .getMostRecentRegionalDataFor(region)
           .subscribe(regionalData => {
             this.data = regionalData;
+            this.linkAndamento = '/andamento/' + this.idRegione + '/' + this.nomeRegione
             this.initChart();
           });
       } else {
         this.dataService.getMostRecentNationalData().subscribe(nationalData => {
           this.data = nationalData;
+          this.linkAndamento = '/andamento'
           this.initChart();
         });
       }

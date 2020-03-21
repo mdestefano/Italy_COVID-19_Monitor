@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Andamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of chartData; index as i">
+    <canvas
+      baseChart
+      [datasets]="chartData[i]"
+      [labels]="chartLabels[i]"
+      [options]="chartOptions"
+      [chartType]="chartType"
+    >
+    </canvas>
+  </ion-card>
+</ion-content>

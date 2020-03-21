@@ -9,6 +9,10 @@
 </ion-header>
 
 <ion-content *ngIf="data">
+<ion-item>
+  <ion-label>Dati aggiornati al {{data.data|date: 'dd/MM/yyyy HH:mm'}}</ion-label>
+</ion-item>
+
   <ion-card>
     <canvas
       baseChart
@@ -21,7 +25,7 @@
     </canvas>
   </ion-card>
 
-  <ion-button expand="full" fill="solid" shape="round" color="primary">
+  <ion-button [routerLink] = "linkAndamento" expand="full" fill="solid" shape="round" color="primary">
     Andamento
   </ion-button>
 
