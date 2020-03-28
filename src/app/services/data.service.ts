@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-import { parse } from "date-fns";
+import { parse, parseISO } from "date-fns";
 import { Observable } from "rxjs";
 
 const basePath =
@@ -77,7 +77,7 @@ export class DataService {
 
   private replaceDataStringInList(list: any[]) {
     list.forEach(element => {
-      element.data = parse(element.data, "yyyy-MM-dd HH:mm:ss", new Date());
+      element.data = parseISO(element.data);
     });
     return list;
   }
