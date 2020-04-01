@@ -85,7 +85,7 @@ export class AndamentoPage implements OnInit {
         labels: labels,
         datasets: [{
           data: chartDataset,
-          borderColor: 'red',
+          borderColor: '#3880ff',
           fill: false,          
         }],        
       })
