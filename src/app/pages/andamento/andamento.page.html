@@ -1,11 +1,19 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Andamento</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>  
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of chartData; index as i">
-    <canvas #pr_chart></canvas>
+  <ion-card *ngFor="let item of labels; index as i">
+    <ion-card-header>
+      <ion-card-title>{{titles[i]}}</ion-card-title>      
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #pr_chart></canvas>
+    </ion-card-content>
   </ion-card>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef, QueryList, ContentChildren } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DataService } from "src/app/services/data.service";
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import * as Chart from 'chart.js';
 
 const baseConfig: Chart.ChartConfiguration = {
@@ -11,9 +11,9 @@ const baseConfig: Chart.ChartConfiguration = {
     maintainAspectRatio: false,
     legend: { display: false },
     scales: {
-      xAxes: [{ display: false }],
-      yAxes: [{ display: false }],
-    }
+      xAxes: [{ display: true }],
+      yAxes: [{ display: true }],
+    },  
   }
 };
 
@@ -35,7 +35,8 @@ export class AndamentoPage implements OnInit {
   nomeRegione;
   datePipe: DatePipe;
 
-  labels = ['totale_casi', 'totale_attualmente_positivi','deceduti', 'dimessi_guariti']
+  labels = ['totale_casi', 'totale_positivi','deceduti', 'dimessi_guariti'];
+  titles = ['Totale Casi', 'Totale Positivi', 'Deceduti','Guariti'];
 
   charts: Chart[] = [];
 
@@ -56,11 +57,13 @@ export class AndamentoPage implements OnInit {
           .getHistoricalDataFor(region)
           .subscribe(regionalData => {
             this.data = regionalData;
+            this.data = this.data.reverse();
             this.initChart();
           });
       } else {
         this.dataService.getNationalData().subscribe(nationalData => {
           this.data = nationalData;
+          this.data = this.data.reverse();
           this.initChart();
           
         });
@@ -83,14 +86,13 @@ export class AndamentoPage implements OnInit {
         datasets: [{
           data: chartDataset,
           borderColor: 'red',
-          fill: false
-        }],
+          fill: false,          
+        }],        
       })
     }    
   }
 
-  doStuff() {
-    console.log(this.chartElementRefs.length);
+  ionViewDidEnter() {   
     
     this.charts = this.chartElementRefs.map((chartElementRef, index) => {
       const config = Object.assign({}, baseConfig, { data: this.chartData[index] });
