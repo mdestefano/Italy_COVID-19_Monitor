@@ -1,10 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChildren, ElementRef, QueryList, ContentChildren } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DataService } from "src/app/services/data.service";
-import { ChartDataSets } from "chart.js";
-import { Label } from "ng2-charts";
-import { format } from "url";
 import { DatePipe } from '@angular/common';
+import * as Chart from 'chart.js';
+
+const baseConfig: Chart.ChartConfiguration = {
+  type: 'line',
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: { display: false },
+    scales: {
+      xAxes: [{ display: false }],
+      yAxes: [{ display: false }],
+    }
+  }
+};
+
 
 @Component({
   selector: "app-andamento",
@@ -12,13 +24,11 @@ import { DatePipe } from '@angular/common';
   styleUrls: ["./andamento.page.scss"]
 })
 export class AndamentoPage implements OnInit {
-  chartData: ChartDataSets[]; //= [{ data: [], label: "" }];
-  chartLabels: Label[][];
-  chartOptions = {
-    responsive: true
-  };
 
-  chartType = "line";
+  @ViewChildren('pr_chart', { read: ElementRef }) chartElementRefs: QueryList<ElementRef>;
+
+  chartData: Chart.ChartData[] = [];
+
   data: any[];
   dispRegioni: boolean;
   idRegione;
@@ -26,6 +36,8 @@ export class AndamentoPage implements OnInit {
   datePipe: DatePipe;
 
   labels = ['totale_casi', 'totale_attualmente_positivi','deceduti', 'dimessi_guariti']
+
+  charts: Chart[] = [];
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.dispRegioni = false;
@@ -50,23 +62,39 @@ export class AndamentoPage implements OnInit {
         this.dataService.getNationalData().subscribe(nationalData => {
           this.data = nationalData;
           this.initChart();
+          
         });
       }
     });
   }
 
   private initChart() {
-    this.chartLabels = [];
-    this.chartData = [];
+    for (const label of this.labels) {
+      const labels = [];
+      const chartDataset = [];
 
-    for (let i = 0; i < 4; i++) {
-      this.chartData.push({ data: [], label: "" });
-      this.chartLabels.push([]);
-
-      for(let item of this.data){
-        this.chartData[i].data.push(item[this.labels[i]]);
-        this.chartLabels[i].push(this.datePipe.transform(item.data, 'dd/MM/yyyy'));
+      for (const item of this.data) {        
+        labels.push(this.datePipe.transform(item.data,'dd/MM/yyyy'));
+        chartDataset.push(item[label]);
       }
-    }
+
+      this.chartData.push({
+        labels: labels,
+        datasets: [{
+          data: chartDataset,
+          borderColor: 'red',
+          fill: false
+        }],
+      })
+    }    
+  }
+
+  doStuff() {
+    console.log(this.chartElementRefs.length);
+    
+    this.charts = this.chartElementRefs.map((chartElementRef, index) => {
+      const config = Object.assign({}, baseConfig, { data: this.chartData[index] });
+      return new Chart(chartElementRef.nativeElement, config);
+    });    
   }
 }

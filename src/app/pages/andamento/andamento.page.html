@@ -6,13 +6,6 @@
 
 <ion-content>
   <ion-card *ngFor="let item of chartData; index as i">
-    <canvas
-      baseChart
-      [datasets]="chartData[i]"
-      [labels]="chartLabels[i]"
-      [options]="chartOptions"
-      [chartType]="chartType"
-    >
-    </canvas>
+    <canvas #pr_chart></canvas>
   </ion-card>
 </ion-content>
