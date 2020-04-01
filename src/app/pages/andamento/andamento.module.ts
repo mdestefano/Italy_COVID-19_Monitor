@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DisplayDataPageRoutingModule } from './display-data-routing.module';
+import { AndamentoPageRoutingModule } from './andamento-routing.module';
 
-import { DisplayDataPage } from './display-data.page';
+import { AndamentoPage } from './andamento.page';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ChartsModule } from 'ng2-charts';
     CommonModule,
     FormsModule,
     IonicModule,
-    DisplayDataPageRoutingModule,
+    AndamentoPageRoutingModule,
     ChartsModule
   ],
-  declarations: [DisplayDataPage]
+  declarations: [AndamentoPage]
 })
-export class DisplayDataPageModule {}
+export class AndamentoPageModule {}

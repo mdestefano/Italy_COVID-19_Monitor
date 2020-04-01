@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Andamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of chartData; index as i">
+    <canvas #pr_chart></canvas>
+  </ion-card>
+</ion-content>
