@@ -35,8 +35,8 @@ export class AndamentoPage implements OnInit {
   nomeRegione;
   datePipe: DatePipe;
 
-  labels = ['totale_casi', 'totale_positivi','deceduti', 'dimessi_guariti'];
-  titles = ['Totale Casi', 'Totale Positivi', 'Deceduti','Guariti'];
+  labels = ['totale_casi', 'nuovi_positivi', 'totale_positivi', 'totale_ospedalizzati', 'terapia_intensiva', 'deceduti', 'dimessi_guariti'];
+  titles = ['Totale Casi', 'Nuovi Positivi', 'Attualmente Positivi', 'Ospedalizzati', 'In Terapia Intensiva', 'Deceduti','Guariti'];
 
   charts: Chart[] = [];
 

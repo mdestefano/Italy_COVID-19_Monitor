@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Andamento</ion-title>
+    <ion-title *ngIf="dispRegioni">Andamento Regione {{nomeRegione}}</ion-title>
+    <ion-title *ngIf="!dispRegioni">Andamento Nazionale</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
